@@ -1,24 +1,16 @@
-import os
-import tempfile
-
+import requests
 import pytest
 
-from application import app
 
-@pytest.fixture
-def client():
-    with app.test_client() as client:
-        with app.app_context():
-            yield client
+def test_should_return_index_page():
 
-def test_should_return_index_page(client):
+    rv = requests.get('http://localhost:5000/')
 
-    rv = client.get('/')
+    assert "Index Page" == rv.text
 
-    assert b"Index Page" == rv.data
+def test_should_return_hello_world():
 
-def test_should_return_hello_world(client):
+    rv = requests.get('http://localhost:5000/hello')
 
-    rv = client.get('/hello')
+    assert "Hello World" == rv.text
 
-    assert b"Hello World!" == rv.data
