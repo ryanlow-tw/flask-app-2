@@ -29,4 +29,4 @@ def books_id(book_id):
 @app.route('/books/ratings', methods=["GET"])
 def ratings():
     query_strings = request.args.to_dict()
-    return Analytics.get_average_rating()
+    return Analytics.get_book_ratings(query_strings)
