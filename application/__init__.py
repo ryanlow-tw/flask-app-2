@@ -5,4 +5,3 @@ load_dotenv('.env')
 app = Flask(__name__)
 
 import application.routes
-import database

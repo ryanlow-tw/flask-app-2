@@ -1,4 +1,5 @@
 from application import app
+from database import collection
 
 
 @app.route('/')
