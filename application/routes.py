@@ -1,7 +1,7 @@
 from application import app
-from database import collection
+from mongo_database import collection
 from flask import request
-from application.parse_query_mongo import MongoFilter as Database
+from application.mongo_utils import MongoFilter as Database
 
 
 @app.route('/')
