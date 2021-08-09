@@ -1,5 +1,7 @@
 from application import app
 from database import collection
+from flask import request
+from application.parse_query_mongo import MongoFilter as Database
 
 
 @app.route('/')
@@ -9,3 +11,14 @@ def index():
 @app.route('/hello')
 def hello():
     return 'Hello World!'
+
+@app.route('/books', methods=["GET"])
+def books():
+    query_strings = request.args.to_dict()
+    return Database.filter_books(collection, query_strings)
+
+@app.route('/books/<int:book_id>', methods=["GET"])
+def books_id(book_id):
+    filter = {"id": book_id}
+    return Database.filter_books(collection, filter)
+
