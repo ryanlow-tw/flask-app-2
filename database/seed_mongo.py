@@ -2,7 +2,7 @@ from pymongo import MongoClient
 import json
 import os
 
-def seed_database(mongo_url, db_name, collection_name):
+def seed_database(mongo_url, db_name, collection_name) -> None:
     client = MongoClient(mongo_url)
     database = client[db_name]
     collection = database[collection_name]
