@@ -14,6 +14,7 @@ class PySparkFilter:
 
     @staticmethod
     def get_book_ratings(query_strings):
+
         ratings_functions = {
             "average": PySparkFilter.get_average_rating,
             "highly-rated": PySparkFilter.get_high_ratings,
@@ -21,6 +22,9 @@ class PySparkFilter:
         }
 
         query_string_ratings = query_strings["param"]
+
+        if query_string_ratings not in ratings_functions:
+            return {}
 
         return ratings_functions[query_string_ratings]()
 
