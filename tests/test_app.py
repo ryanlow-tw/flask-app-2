@@ -63,4 +63,27 @@ def test_that_route_returns_average_rating():
     json_object = r.json()
     average = json_object['mean']
     assert 200 == r.status_code
-    assert average == 4.01
+    assert  4.01 == average
+
+
+def test_that_route_returns_highly_rated_books():
+    r = requests.get("http://localhost:5000/books/ratings?param=highly-rated")
+    json_object = r.json()
+    average_rating = json_object['highly-rated'][30]['average_rating']
+    assert 200 == r.status_code
+    assert 4.01 <= average_rating
+
+
+def test_that_route_returns_less_rated_books():
+    r = requests.get("http://localhost:5000/books/ratings?param=less-rated")
+    json_object = r.json()
+    average_rating = json_object['less-rated'][42]['average_rating']
+    assert 200 == r.status_code
+    assert 4.01 > average_rating
+
+
+def test_that_ratings_route_returns_empty_json():
+    r = requests.get("http://localhost:5000/books/ratings?param=hahahahaha")
+    json_object = r.json()
+    assert 200 == r.status_code
+    assert {} == json_object
